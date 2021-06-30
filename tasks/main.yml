@@ -1,15 +1,11 @@
 ---
 # tasks file for containerize-java-app-
 
-- name: Copying application
+- name: Copy files
   copy:
-    src: "{{app_src}}"
+    src: "{{item}}"
     dest: "{{app_path}}/"
-
-- name: Building App
-  template:
-    src:  "{{docker_file}}"
-    dest: "{{app_path}}/Dockerfile"
+  with_items: "{{app_srcs}}"
 
 - name: Copying Dockerfile
   template:

@@ -8,3 +8,6 @@ docker_file: ".Dockerfile"
 app_path: "/opt/{{app_name}}"
 src_image: ""
 app_build_cmd: "mvn clean install"
+app_srcs:
+  - "./src"
+  - "pom.xml"
