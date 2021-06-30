@@ -1,0 +1,10 @@
+---
+# defaults file for containerize-java-app-
+app_name: AppName
+app_ports: []
+app_maintainer: ""
+app_image_name: "{{app_name}}:latest"
+docker_file: ".Dockerfile"
+app_path: "/opt/{{app_name}}"
+src_image: ""
+app_build_cmd: "mvn clean install"
