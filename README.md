@@ -1,31 +1,42 @@
-Role Name
+Containerize JAVA app
 =========
 
-A brief description of the role goes here.
+Role allows to containerize an arbitrarry JAVA application on a remote host.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Docker installed on the remote host.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+app_name - application name
+app_ports [] - array of application ports to expose
+app_maintainer - maintainer string
+app_image_name - app image name. Default: "{{app_name}}:latest"
+docker_file - local path to docker file
+app_path    - path to install sources on the remote host
+app_build_cmd  Default: "mvn clean install"
+app_srcs [] - Array of sources
 
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+---
+- hosts: all
+  roles:
+    - role: "vyacheslavisaev.containerize_java_app"
+      vars:
+        app_name:  "java-server"
+        app_port: "8888"
+        app_ports: [
+          "{{app_port}}"
+        ]
+        app_maintainer: "v.isaev@email.com"
+        app_src: ["./src", "pom.xml"]
+        docker_file: "docker/.Dockerfile.singlestage"
 
 License
 -------
@@ -35,4 +46,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Viacheslav Isaev has two decades of experience of distributed high payload systems development. He has been in charge of developing control systems for safety-critical facilities like railroads and particle accelerators, high-payload event processing systems for cybersecurity and mobile access points, introducing in house CI/CD practices. His hands-on experience incldues all stages of IT solutions development and operation. Vyacheslav’s interests lays in automation spectr either it is pure software or hardware-software solutions. Vyacheslav defines the key to success in 3 pillars  Domain Driven Design, Behavioral Driven and Test-Driven Development, which are standing on the foundation of  Object Oriented Design and Clean Code practices.
