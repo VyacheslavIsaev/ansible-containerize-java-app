@@ -11,32 +11,31 @@ Docker installed on the remote host.
 Role Variables
 --------------
 
-app_name - application name
-app_ports [] - array of application ports to expose
-app_maintainer - maintainer string
-app_image_name - app image name. Default: "{{app_name}}:latest"
-docker_file - local path to docker file
-app_path    - path to install sources on the remote host
-app_build_cmd  Default: "mvn clean install"
-app_srcs [] - Array of sources
+* app_name - application name
+* app_ports [] - array of application ports to expose
+* app_maintainer - maintainer string
+* app_image_name - app image name. Default: "{{app_name}}:latest"
+* docker_file - local path to docker file
+* app_path    - path to install sources on the remote host
+* app_build_cmd  Default: "mvn clean install"
+* app_srcs [] - Array of sources
 
 
 Example Playbook
 ----------------
 
----
-- hosts: all
-  roles:
-    - role: "vyacheslavisaev.containerize_java_app"
-      vars:
-        app_name:  "java-server"
-        app_port: "8888"
-        app_ports: [
-          "{{app_port}}"
-        ]
-        app_maintainer: "v.isaev@email.com"
-        app_src: ["./src", "pom.xml"]
-        docker_file: "docker/.Dockerfile.singlestage"
+    - hosts: all
+      roles:
+        - role: "vyacheslavisaev.containerize_java_app"
+          vars:
+            app_name:  "java-server"
+            app_port: "8888"
+            app_ports: [
+              "{{app_port}}"
+            ]
+            app_maintainer: "v.isaev@email.com"
+            app_src: ["./src", "pom.xml"]
+            docker_file: "docker/.Dockerfile.singlestage"
 
 License
 -------
