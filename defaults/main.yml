@@ -11,3 +11,4 @@ app_build_cmd: "mvn clean install"
 app_srcs:
   - "./src"
   - "pom.xml"
+app_templates: {}
